@@ -1,0 +1,63 @@
+@import "src/theme/variables";
+@import "src/theme/fonts";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 32px;
+  &Logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    @include logo;
+    color: $black-600;
+    &Img {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &Nav {
+    display: flex;
+    gap: 32px;
+    &Link {
+      padding: 8px 20px;
+      @include nav;
+      color: $black-300;
+
+      &Active {
+        color: $black-600;
+        background: $black-100;
+        padding: 8px 20px;
+        @include nav;
+        border-radius: 20px;
+      }
+    }
+  }
+
+  &Left {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  &Cart {
+    position: relative;
+
+    &Quantity {
+      position: absolute;
+      @include quantity;
+      color: $white;
+      background: $blue;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      right: -3px;
+      top: -7px;
+    }
+  }
+}

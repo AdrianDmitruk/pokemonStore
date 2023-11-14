@@ -1,0 +1,9 @@
+@import "src/theme/variables";
+@import "src/theme/fonts";
+
+.container {
+  max-width: 1373px;
+  width: 100%;
+  padding: 32px 15px;
+  margin: 0 auto;
+}
