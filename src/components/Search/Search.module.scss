@@ -1,0 +1,16 @@
+@import "src/theme/variables";
+@import "src/theme/fonts";
+
+.input {
+  @include search;
+  color: $black-100;
+  padding: 13px 12px !important;
+
+  ::placeholder {
+    @include search;
+    color: $black-300;
+  }
+  &Img {
+    margin-inline-end: 6px;
+  }
+}

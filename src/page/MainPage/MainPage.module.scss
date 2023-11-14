@@ -1,2 +1,19 @@
 @import "src/theme/variables";
 @import "src/theme/fonts";
+
+.main {
+  display: flex;
+  gap: 28px;
+
+  &Left {
+    max-width: 315px;
+    width: 100%;
+  }
+
+  &Right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+}
