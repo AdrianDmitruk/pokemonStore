@@ -1,0 +1,52 @@
+@import "src/theme/variables";
+@import "src/theme/fonts";
+
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+
+  &Header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &Number {
+      @include filtersMainTitle;
+      color: $black-600;
+    }
+
+    &Sort {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      &Title {
+        @include priceCard;
+        color: $black-600;
+      }
+    }
+  }
+
+  &Main {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 20px;
+    background: $white;
+    border-radius: 31px;
+    border: 1px solid $black-100;
+    max-width: 150px;
+    width: 100%;
+
+    &Price {
+      @include priceCard;
+      color: $black-600;
+    }
+
+    &Btn {
+      display: flex;
+    }
+  }
+}
