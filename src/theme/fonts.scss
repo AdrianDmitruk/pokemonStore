@@ -45,3 +45,27 @@
   font-weight: 500;
   line-height: normal;
 }
+
+@mixin basketTitle {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+@mixin basketPrise {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 125%;
+}
+
+@mixin basketQuantity {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+@mixin basketSunnary {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 125%;
+}

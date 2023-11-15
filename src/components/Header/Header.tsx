@@ -40,7 +40,7 @@ export const Header: FC = () => {
           //   }
 
           className={styles.headerCart}
-          to={""}
+          to={"/basket"}
         >
           <span className={styles.headerCartQuantity}>2</span>
           <Cart />

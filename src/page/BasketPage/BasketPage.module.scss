@@ -1,0 +1,68 @@
+@import "src/theme/variables";
+@import "src/theme/fonts";
+
+.basketNot {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+
+  &Block {
+    max-width: 301px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &Title {
+    @include filtersHeaderTitle;
+    text-align: center;
+    color: $black-600;
+  }
+
+  &Subtitle {
+    text-align: center;
+    color: $black-400;
+  }
+
+  &Btn {
+    padding: 9px 20px;
+    height: auto;
+  }
+}
+
+.basket {
+  display: flex;
+  justify-content: flex-start;
+
+  &Wrap {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  &Left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 951px;
+
+    &Item {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+  }
+
+  &Title {
+    @include basketTitle;
+    color: $black-600;
+  }
+
+  &Right {
+    max-width: 315px;
+    width: 100%;
+  }
+}

@@ -1,0 +1,44 @@
+@import "src/theme/variables";
+@import "src/theme/fonts";
+
+.summary {
+  background: $white;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 20px;
+  border: 1px solid $black-100;
+  border-radius: 12px;
+
+  &Title {
+    @include filtersHeaderTitle;
+    color: $black-600;
+  }
+
+  &Border {
+    height: 1px;
+    width: 100%;
+    background: $black-200;
+  }
+
+  &Main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &Total {
+    @include basketPrise;
+    color: $black-400;
+  }
+
+  &Price {
+    @include basketSunnary;
+    color: $black-600;
+  }
+
+  &Btn {
+    padding: 9px 15px;
+    height: auto;
+  }
+}

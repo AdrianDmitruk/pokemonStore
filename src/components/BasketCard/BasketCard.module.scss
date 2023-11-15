@@ -1,0 +1,50 @@
+@import "src/theme/variables";
+@import "src/theme/fonts";
+
+.item {
+  display: flex;
+  align-items: center;
+
+  &Img {
+    width: 80px;
+    height: 80px;
+    margin-right: 25px;
+  }
+
+  &Title {
+    max-width: 414px;
+    width: 100%;
+    @include filtersMainTitle;
+    color: $black-600;
+  }
+
+  &Prise {
+    max-width: 144px;
+    width: 100%;
+    text-align: end;
+    @include basketPrise;
+    color: $black-600;
+  }
+
+  &Quantity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 144px;
+    width: 100%;
+    justify-content: flex-end;
+    @include basketQuantity;
+    color: $black-600;
+  }
+
+  &Remove {
+    max-width: 144px;
+    width: 100%;
+    display: flex;
+    gap: 4px;
+    justify-content: flex-end;
+    @include basketPrise;
+    color: $black-600;
+    align-items: center;
+  }
+}
