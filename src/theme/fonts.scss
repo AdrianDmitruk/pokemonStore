@@ -69,3 +69,9 @@
   font-weight: 700;
   line-height: 125%;
 }
+
+@mixin addCard {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 105%;
+}

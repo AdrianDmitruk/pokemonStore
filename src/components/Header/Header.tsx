@@ -28,7 +28,7 @@ export const Header: FC = () => {
           className={({ isActive }) =>
             isActive ? styles.headerNavLinkActive : styles.headerNavLink
           }
-          to={"/sss"}
+          to={"/products"}
         >
           Your Products
         </NavLink>

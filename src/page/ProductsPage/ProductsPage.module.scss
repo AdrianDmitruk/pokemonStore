@@ -1,0 +1,19 @@
+@import "src/theme/variables";
+@import "src/theme/fonts";
+
+.products {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &Title {
+    @include basketTitle;
+    color: $black-600;
+  }
+
+  &Item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}

@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { HashRouter, Routes, Route } from "react-router-dom";
-import { BasketPage, MainPage } from "./page";
+import { BasketPage, MainPage, ProductsPage } from "./page";
 import { Layouts } from "./components";
 
 const App: FC = () => {
@@ -11,6 +11,7 @@ const App: FC = () => {
           <Route element={<Layouts />}>
             <Route path={"/"} element={<MainPage />} />
             <Route path={"/basket"} element={<BasketPage />} />
+            <Route path={"/products"} element={<ProductsPage />} />
           </Route>
         </Routes>
       </HashRouter>

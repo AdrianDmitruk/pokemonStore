@@ -6,3 +6,4 @@ export * from "./Card";
 export * from "./Result";
 export * from "./BasketCard";
 export * from "./Summary";
+export * from "./ProductsItem";
