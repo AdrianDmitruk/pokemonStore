@@ -6,8 +6,18 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { Cart } from "../../assets/icon/Cart";
 import { Logout } from "../../assets/icon/Logout";
+import { useAppDispatch } from "../../redux/store";
+import { logout } from "../../redux/auth/slice";
+import { TOKEN_JWT } from "../../constans";
 
 export const Header: FC = () => {
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    localStorage.removeItem(TOKEN_JWT);
+  };
+
   return (
     <header className={styles.header}>
       <Link to={""} className={styles.headerLogo}>
@@ -45,14 +55,9 @@ export const Header: FC = () => {
           <span className={styles.headerCartQuantity}>2</span>
           <Cart />
         </NavLink>
-        <NavLink
-          //   className={({ isActive }) =>
-          //     isActive ? styles.headerNavLinkActive : styles.headerNavLink
-          //   }
-          to={""}
-        >
+        <button onClick={handleLogout}>
           <Logout />
-        </NavLink>
+        </button>
       </div>
     </header>
   );

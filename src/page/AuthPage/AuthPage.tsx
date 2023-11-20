@@ -4,8 +4,13 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import { Input, Button, Select } from "antd";
 import styles from "./AuthPage.module.scss"; // Замените на путь к вашему файлу стилей
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectRegistrationData } from "../../redux/auth/selectors";
+import { useAppDispatch } from "../../redux/store";
+import { fetchLogin } from "../../redux/auth/async-actions";
+import { Status } from "../../redux/auth/types";
 
-interface IAuthData {
+interface IRegisterData {
   email: string;
   password: string;
   phone: string;
@@ -20,6 +25,11 @@ interface IAuthData {
   };
 }
 
+interface ILoginData {
+  email: string;
+  password: string;
+}
+
 type FormType = "login" | "register";
 
 interface AuthPageProps {
@@ -27,7 +37,7 @@ interface AuthPageProps {
 }
 
 export const AuthPage: FC<AuthPageProps> = ({ type }) => {
-  const initialValues: IAuthData = {
+  const initialValues: IRegisterData = {
     email: "",
     password: "",
     phone: "",
@@ -42,14 +52,26 @@ export const AuthPage: FC<AuthPageProps> = ({ type }) => {
     },
   };
 
+  const { status } = useSelector(selectRegistrationData);
+
+  const dispatch = useAppDispatch();
+
   const isRegisterForm = type === "register";
 
   const title = isRegisterForm ? "Sign Up" : "Sign In";
 
   const { Option } = Select;
 
-  const onSubmit = (values: IAuthData) => {
-    console.log(values);
+  const onSubmit = (values: IRegisterData) => {
+    if (type === "login" || status === Status.SUCCESS) {
+      const params: ILoginData = {
+        email: values.email,
+        password: values.password,
+      };
+      dispatch(fetchLogin(params));
+    } else {
+      dispatch(fetchLogin(values));
+    }
   };
 
   return (
