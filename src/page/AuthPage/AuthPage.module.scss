@@ -1,0 +1,59 @@
+@import "src/theme/variables";
+@import "src/theme/fonts";
+
+.auth {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &Form {
+    max-width: 408px;
+    width: 100%;
+  }
+
+  &Title {
+    color: $black-600;
+    @include titleForm;
+    margin-bottom: 15px;
+  }
+
+  &Name {
+    display: flex;
+    gap: 10px;
+  }
+
+  &InputTitle {
+    @include inputForm;
+    margin-bottom: 8px;
+  }
+
+  &Input {
+    margin-bottom: 8px;
+  }
+
+  &Btn {
+    width: 100%;
+  }
+
+  &BtnWrap {
+    margin: 10px 0;
+  }
+
+  &LinkWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  &LinkTitle {
+    @include linkTitleAuth;
+    color: $black-600;
+  }
+
+  &Link {
+    @include linkTitleAuth;
+    color: $blue;
+  }
+}

@@ -75,3 +75,21 @@
   font-weight: 400;
   line-height: 105%;
 }
+
+@mixin titleForm {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 138.462%;
+}
+
+@mixin inputForm {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 150%;
+}
+
+@mixin linkTitleAuth {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+}
