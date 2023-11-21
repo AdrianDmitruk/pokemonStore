@@ -1,16 +1,33 @@
-import { FC, useState, ChangeEvent } from "react";
+import { FC, useState, useEffect, ChangeEvent } from "react";
 
 import { Button, Input } from "antd";
 
 import reset from "../../assets/icon/Reset.svg";
 
 import styles from "./Filters.module.scss";
-import { useAppDispatch } from "../../redux/store";
+import { RootState, useAppDispatch } from "../../redux/store";
 import { setPriceFrom, setPriceTo } from "../../redux/products/slice";
+import { useSelector } from "react-redux";
 
 export const Filters: FC = () => {
   const [fromValue, setFromValue] = useState<string>("");
   const [toValue, setToValue] = useState<string>("");
+
+  const priceFrom = useSelector<RootState, number | null>(
+    (state) => state.products.priceFrom
+  );
+  const priceTo = useSelector<RootState, number | null>(
+    (state) => state.products.priceTo
+  );
+
+  useEffect(() => {
+    if (priceFrom === null) {
+      setFromValue("");
+    }
+    if (priceTo === null) {
+      setToValue("");
+    }
+  }, [priceFrom, priceTo]);
 
   const dispatch = useAppDispatch();
 

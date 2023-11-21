@@ -37,8 +37,7 @@
     background: $white;
     border-radius: 31px;
     border: 1px solid $black-100;
-    max-width: 150px;
-    width: 100%;
+    width: max-content;
 
     &Price {
       @include priceCard;

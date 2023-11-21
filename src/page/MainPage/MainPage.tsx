@@ -4,7 +4,7 @@ import { Card, Filters, Result, Search } from "../../components";
 
 import styles from "./MainPage.module.scss";
 import { Pagination, Spin } from "antd";
-import { useAppDispatch } from "../../redux/store";
+import { RootState, useAppDispatch } from "../../redux/store";
 import { fetchProducts } from "../../redux/products/async-actions";
 import { useSelector } from "react-redux";
 import { selectProductsData } from "../../redux/products/selectors";
@@ -13,6 +13,16 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 export const MainPage: FC = () => {
   const { data, status } = useSelector(selectProductsData);
+
+  const searchQuery = useSelector<RootState, string>(
+    (state) => state.products.searchQuery
+  );
+  const priceFrom = useSelector<RootState, number | null>(
+    (state) => state.products.priceFrom
+  );
+  const priceTo = useSelector<RootState, number | null>(
+    (state) => state.products.priceTo
+  );
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -44,7 +54,7 @@ export const MainPage: FC = () => {
         </section>
         <section className={styles.mainRight}>
           <Search />
-          <Result />
+          {(searchQuery || priceFrom || priceTo) && <Result />}
           <div className={styles.mainRightCard}>
             {status === Status.LOADING ? (
               <Spin size="large" />
