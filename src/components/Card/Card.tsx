@@ -1,17 +1,18 @@
 import { FC } from "react";
 
 import styles from "./Card.module.scss";
-import { Button } from "antd";
 import { Products } from "../../redux/products/types";
+import { Link } from "react-router-dom";
+import { ButtonCart } from "..";
 
-interface CardProps {
+export interface CardProps {
   elem: Products;
 }
 
 export const Card: FC<CardProps> = (elem) => {
   const { name, price, image } = elem.elem;
   return (
-    <div className={styles.card}>
+    <Link to={"/sad"} className={styles.card}>
       <img className={styles.cardImg} src={image} alt="content" />
       <div className={styles.cardContent}>
         <div className={styles.cardContentMain}>
@@ -21,10 +22,8 @@ export const Card: FC<CardProps> = (elem) => {
             <span className={styles.cardContentMainPriceRight}>${price}</span>
           </div>
         </div>
-        <Button className={styles.cardContentBtn} type="primary">
-          Add to Cart
-        </Button>
+        <ButtonCart elem={elem.elem} />
       </div>
-    </div>
+    </Link>
   );
 };

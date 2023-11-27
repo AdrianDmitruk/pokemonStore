@@ -1,0 +1,14 @@
+@import "src/theme/variables";
+@import "src/theme/fonts";
+
+.btnWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn {
+  padding: 9px 15px;
+  height: auto;
+}

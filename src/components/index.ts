@@ -7,3 +7,4 @@ export * from "./Result";
 export * from "./BasketCard";
 export * from "./Summary";
 export * from "./ProductsItem";
+export * from "./ButtonCart";
