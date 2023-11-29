@@ -10,9 +10,9 @@ export interface CardProps {
 }
 
 export const Card: FC<CardProps> = (elem) => {
-  const { name, price, image } = elem.elem;
+  const { id, name, price, image } = elem.elem;
   return (
-    <Link to={"/sad"} className={styles.card}>
+    <Link to={`/product/${id}`} className={styles.card}>
       <img className={styles.cardImg} src={image} alt="content" />
       <div className={styles.cardContent}>
         <div className={styles.cardContentMain}>

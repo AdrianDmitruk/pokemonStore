@@ -1,6 +1,12 @@
 import { FC } from "react";
 import { HashRouter, Routes, Route } from "react-router-dom";
-import { AuthPage, BasketPage, MainPage, ProductsPage } from "./page";
+import {
+  AuthPage,
+  BasketPage,
+  FullProductPage,
+  MainPage,
+  ProductsPage,
+} from "./page";
 import { Layouts } from "./components";
 import { PrivateRoute, PublicRoute } from "./router";
 
@@ -14,6 +20,7 @@ const App: FC = () => {
               <Route path={"/"} element={<MainPage />} />
               <Route path={"/basket"} element={<BasketPage />} />
               <Route path={"/products"} element={<ProductsPage />} />
+              <Route path={"/product/:id"} element={<FullProductPage />} />
             </Route>
           </Route>
           <Route element={<PublicRoute />}>

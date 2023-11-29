@@ -1,0 +1,55 @@
+@import "src/theme/variables";
+@import "src/theme/fonts";
+
+.full {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+
+  &Wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 50%;
+  }
+
+  &Title {
+    @include titleForm;
+    color: $black-600;
+  }
+
+  &Abili {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &Title {
+      @include basketTitle;
+    }
+
+    &Name {
+      @include inputForm;
+      margin-bottom: 5px;
+    }
+
+    &Desc {
+      @include quantity;
+    }
+  }
+
+  &Content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &Stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  &Price {
+    @include inputForm;
+  }
+}
