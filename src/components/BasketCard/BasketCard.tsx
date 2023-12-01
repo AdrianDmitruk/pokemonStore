@@ -7,6 +7,7 @@ import cross from "../../assets/icon/Cross.svg";
 import styles from "./BasketCard.module.scss";
 import { AddItemToCart } from "../../redux/cart/types";
 import { useCart } from "../../hooks/useCart";
+import { Link } from "react-router-dom";
 
 interface BasketCardProps {
   elem: AddItemToCart;
@@ -48,7 +49,7 @@ export const BasketCard: FC<BasketCardProps> = ({ elem }) => {
   };
 
   return (
-    <div className={styles.item}>
+    <Link to={`/product/${id}`} className={styles.item}>
       <>
         <img className={styles.itemImg} src={image} alt="content" />
         <h3 className={styles.itemTitle}>{name}</h3>
@@ -74,6 +75,6 @@ export const BasketCard: FC<BasketCardProps> = ({ elem }) => {
           <span>Remove</span>
         </button>
       </>
-    </div>
+    </Link>
   );
 };
