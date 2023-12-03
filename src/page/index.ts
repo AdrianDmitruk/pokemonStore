@@ -1,5 +1,5 @@
 export * from "./MainPage";
 export * from "./BasketPage";
-export * from "./ProductsPage";
+export * from "./ProfilePage";
 export * from "./AuthPage";
 export * from "./FullProductPage";

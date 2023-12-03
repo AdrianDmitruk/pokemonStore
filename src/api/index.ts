@@ -4,7 +4,7 @@ import { TOKEN_JWT } from "../constans";
 
 import { AUTH_LOGIN, AUTH_REGISTRATION } from "./endpoint";
 
-const baseURL = "https://pokemonstore.onrender.com/";
+const baseURL = "https://pokemonstoreserver.onrender.com/";
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL,

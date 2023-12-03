@@ -16,6 +16,7 @@ export const ButtonCart: FC<CardProps> = (elem) => {
     status,
     udateItemInCart,
     removeItemFromCart,
+    isAddItemLoading,
   } = useCart();
 
   const productInCart = cartInfo.itemsList.find(
@@ -97,7 +98,12 @@ export const ButtonCart: FC<CardProps> = (elem) => {
           </Button>
         </div>
       ) : (
-        <Button onClick={handleAddItem} className={styles.btn} type="primary">
+        <Button
+          loading={isAddItemLoading}
+          onClick={handleAddItem}
+          className={styles.btn}
+          type="primary"
+        >
           Add to Cart
         </Button>
       )}

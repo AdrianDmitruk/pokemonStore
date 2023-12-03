@@ -26,7 +26,11 @@ const initialState: CartSliceState = {
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
-  reducers: {},
+  reducers: {
+    setData(state, action: PayloadAction<Cart>) {
+      state.data = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       getCartFeatch.fulfilled,
@@ -102,5 +106,7 @@ export const cartSlice = createSlice({
     );
   },
 });
+
+export const { setData } = cartSlice.actions;
 
 export default cartSlice.reducer;

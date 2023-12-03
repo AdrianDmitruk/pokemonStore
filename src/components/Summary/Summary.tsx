@@ -3,9 +3,22 @@ import { FC } from "react";
 import styles from "./Summary.module.scss";
 import { Button } from "antd";
 import { useCart } from "../../hooks/useCart";
+import { useUser } from "../../hooks/useUser";
 
 export const Summary: FC = () => {
-  const { cartInfo } = useCart();
+  const { cartInfo, udateOrderFromCart, isOrderLoading } = useCart();
+
+  const { userInfo } = useUser();
+
+  const handlePaymentClick = () => {
+    const params = {
+      customerId: userInfo._id,
+      totalPrice: cartInfo.totalPrice,
+      itemsList: cartInfo.itemsList,
+    };
+
+    udateOrderFromCart(params);
+  };
 
   return (
     <div className={styles.summary}>
@@ -15,7 +28,12 @@ export const Summary: FC = () => {
         <span className={styles.summaryTotal}>Total price</span>
         <span className={styles.summaryPrice}>${cartInfo.totalPrice}</span>
       </div>
-      <Button className={styles.summaryBtn} type="primary">
+      <Button
+        onClick={handlePaymentClick}
+        className={styles.summaryBtn}
+        type="primary"
+        loading={isOrderLoading}
+      >
         Proceed to Ckeckout
       </Button>
     </div>

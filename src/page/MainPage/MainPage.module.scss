@@ -20,6 +20,11 @@
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
+
+      &Load {
+        display: flex;
+        justify-content: center;
+      }
     }
   }
 }

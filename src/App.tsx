@@ -5,7 +5,7 @@ import {
   BasketPage,
   FullProductPage,
   MainPage,
-  ProductsPage,
+  ProfilePage,
 } from "./page";
 import { Layouts } from "./components";
 import { PrivateRoute, PublicRoute } from "./router";
@@ -19,7 +19,7 @@ const App: FC = () => {
             <Route element={<PrivateRoute />}>
               <Route path={"/"} element={<MainPage />} />
               <Route path={"/basket"} element={<BasketPage />} />
-              <Route path={"/products"} element={<ProductsPage />} />
+              <Route path={"/profile"} element={<ProfilePage />} />
               <Route path={"/product/:id"} element={<FullProductPage />} />
             </Route>
           </Route>

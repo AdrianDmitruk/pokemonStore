@@ -11,6 +11,8 @@ import { selectProductsData } from "../../redux/products/selectors";
 import { Status } from "../../redux/auth/types";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import cn from "classnames";
+
 export const MainPage: FC = () => {
   const { data, status } = useSelector(selectProductsData);
 
@@ -55,7 +57,11 @@ export const MainPage: FC = () => {
         <section className={styles.mainRight}>
           <Search />
           {(searchQuery || priceFrom || priceTo) && <Result />}
-          <div className={styles.mainRightCard}>
+          <div
+            className={cn(styles.mainRightCard, {
+              [styles.mainRightCardLoad]: status === Status.LOADING,
+            })}
+          >
             {status === Status.LOADING ? (
               <Spin size="large" />
             ) : (
@@ -65,11 +71,13 @@ export const MainPage: FC = () => {
         </section>
       </div>
       <div className={styles.pagination}>
-        <Pagination
-          defaultCurrent={currentPage}
-          total={480}
-          onChange={handlePageChange}
-        />
+        {status === Status.SUCCESS && (
+          <Pagination
+            defaultCurrent={currentPage}
+            total={480}
+            onChange={handlePageChange}
+          />
+        )}
       </div>
     </>
   );

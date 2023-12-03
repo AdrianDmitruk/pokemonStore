@@ -9,14 +9,19 @@ import { Button, Spin } from "antd";
 import { BasketCard, Summary } from "../../components";
 import { useCart } from "../../hooks/useCart";
 import { useNavigate } from "react-router-dom";
+import { Status } from "../../redux/cart/types";
 
 export const BasketPage: FC = () => {
-  const { cartInfo } = useCart();
+  const { cartInfo, status } = useCart();
 
   const navigate = useNavigate();
 
-  if (!cartInfo) {
-    return <Spin size="large" />;
+  if (status === Status.LOADING) {
+    return (
+      <div className="load">
+        <Spin size="large" />
+      </div>
+    );
   }
 
   return (
@@ -25,7 +30,7 @@ export const BasketPage: FC = () => {
         [styles.basket]: cartInfo.quantity,
       })}
     >
-      {!cartInfo.quantity && (
+      {cartInfo.quantity === 0 && (
         <div className={styles.basketNotBlock}>
           <img src={balloon} alt="balloon" />
           <h2 className={styles.basketNotTitle}>

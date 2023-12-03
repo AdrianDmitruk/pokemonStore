@@ -11,9 +11,10 @@ import { Link } from "react-router-dom";
 
 interface BasketCardProps {
   elem: AddItemToCart;
+  order?: boolean;
 }
 
-export const BasketCard: FC<BasketCardProps> = ({ elem }) => {
+export const BasketCard: FC<BasketCardProps> = ({ elem, order }) => {
   const { id, image, name, price, quantity } = elem;
 
   const { udateItemInCart, removeItemFromCart, cartInfo } = useCart();
@@ -22,7 +23,10 @@ export const BasketCard: FC<BasketCardProps> = ({ elem }) => {
     (cartItem) => cartItem.id === +id
   );
 
-  const handleUpdateItemIncrement = () => {
+  const handleUpdateItemIncrement = (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.preventDefault();
     if (productInCart) {
       const itemForCart = {
         id: +id,
@@ -33,7 +37,11 @@ export const BasketCard: FC<BasketCardProps> = ({ elem }) => {
     }
   };
 
-  const handleUpdateItemDecrement = () => {
+  const handleUpdateItemDecrement = (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.preventDefault();
+
     if (productInCart) {
       const itemForCart = {
         id: productInCart.id,
@@ -44,7 +52,8 @@ export const BasketCard: FC<BasketCardProps> = ({ elem }) => {
     }
   };
 
-  const handleRemoveItem = () => {
+  const handleRemoveItem = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     removeItemFromCart(id.toString());
   };
 
@@ -53,27 +62,35 @@ export const BasketCard: FC<BasketCardProps> = ({ elem }) => {
       <>
         <img className={styles.itemImg} src={image} alt="content" />
         <h3 className={styles.itemTitle}>{name}</h3>
-        <span className={styles.itemPrise}>${price}</span>
+        <span className={styles.itemPrise}>
+          {!order ? price : `Price: ${price}`}$
+        </span>
         <div className={styles.itemQuantity}>
-          <button
-            onClick={
-              productInCart?.quantity === 1
-                ? handleRemoveItem
-                : handleUpdateItemDecrement
-            }
-          >
-            <img src={minus} alt="minus" />
-          </button>
-          <span>{quantity}</span>
-          <button onClick={handleUpdateItemIncrement}>
-            <img src={plus} alt="plus" />
-          </button>
+          {!order && (
+            <button
+              onClick={
+                productInCart?.quantity === 1
+                  ? handleRemoveItem
+                  : handleUpdateItemDecrement
+              }
+            >
+              <img src={minus} alt="minus" />
+            </button>
+          )}
+          <span> {!order ? quantity : `Quantity: ${quantity}`} </span>
+          {!order && (
+            <button onClick={handleUpdateItemIncrement}>
+              <img src={plus} alt="plus" />
+            </button>
+          )}
         </div>
 
-        <button onClick={handleRemoveItem} className={styles.itemRemove}>
-          <img src={cross} alt="cross" />
-          <span>Remove</span>
-        </button>
+        {!order && (
+          <button onClick={handleRemoveItem} className={styles.itemRemove}>
+            <img src={cross} alt="cross" />
+            <span>Remove</span>
+          </button>
+        )}
       </>
     </Link>
   );

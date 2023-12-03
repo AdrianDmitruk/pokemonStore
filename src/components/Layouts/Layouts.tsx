@@ -5,13 +5,17 @@ import styles from "./Layouts.module.scss";
 import { Header } from "..";
 
 import { useCart } from "../../hooks/useCart";
+import { useUser } from "../../hooks/useUser";
 
 export const Layouts: FC = () => {
   const { getCartInfo } = useCart();
 
+  const { getUser } = useUser();
+
   useEffect(() => {
     getCartInfo();
-  }, [getCartInfo]);
+    getUser();
+  }, [getCartInfo, getUser]);
 
   return (
     <div className={styles.container}>

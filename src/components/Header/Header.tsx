@@ -45,9 +45,9 @@ export const Header: FC = () => {
           className={({ isActive }) =>
             isActive ? styles.headerNavLinkActive : styles.headerNavLink
           }
-          to={"/products"}
+          to={"/profile"}
         >
-          Your Products
+          Your Profile
         </NavLink>
       </nav>
       <div className={styles.headerLeft}>

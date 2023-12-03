@@ -6,14 +6,19 @@ import {
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../redux/store";
 import { selectCartData } from "../redux/cart/selectors";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { getCartFeatch } from "../redux/cart/async-actions";
 import { AddItemToCart, UpdateItemInCart } from "../redux/cart/types";
+import { addOrderFeatch } from "../redux/order/async-actions";
+import { AddOrder } from "../redux/order/types";
 
 export const useCart = () => {
   const dispatch = useAppDispatch();
 
   const { data: cartInfo, status } = useSelector(selectCartData);
+
+  const [isOrderLoading, setIsOrderLoading] = useState<boolean>(false);
+  const [isAddItemLoading, setAddItemLoading] = useState<boolean>(false);
 
   const getCartInfo = useCallback(() => {
     dispatch(getCartFeatch());
@@ -21,7 +26,10 @@ export const useCart = () => {
 
   const addItemToCart = useCallback(
     (item: AddItemToCart) => {
-      dispatch(addItemToCartFeatch(item));
+      setAddItemLoading(true);
+      dispatch(addItemToCartFeatch(item)).then(
+        (res) => res && setAddItemLoading(false)
+      );
     },
     [dispatch]
   );
@@ -40,6 +48,16 @@ export const useCart = () => {
     [dispatch]
   );
 
+  const udateOrderFromCart = useCallback(
+    (item: AddOrder) => {
+      setIsOrderLoading(true);
+      dispatch(addOrderFeatch(item)).then(
+        (res) => res && setIsOrderLoading(false)
+      );
+    },
+    [dispatch]
+  );
+
   return {
     getCartInfo,
     cartInfo,
@@ -47,5 +65,8 @@ export const useCart = () => {
     status,
     udateItemInCart,
     removeItemFromCart,
+    udateOrderFromCart,
+    isOrderLoading,
+    isAddItemLoading,
   };
 };

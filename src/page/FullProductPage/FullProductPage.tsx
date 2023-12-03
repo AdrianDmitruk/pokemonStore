@@ -7,7 +7,7 @@ import { selectProductData } from "../../redux/product/selectors";
 import { Status } from "../../redux/product/types";
 import { Card, Image, Spin } from "antd";
 
-import style from "./FullProductPage.module.scss";
+import styles from "./FullProductPage.module.scss";
 import { ButtonCart } from "../../components";
 
 export const FullProductPage: FC = () => {
@@ -24,14 +24,18 @@ export const FullProductPage: FC = () => {
   }, [dispatch, id]);
 
   if (status === Status.LOADING) {
-    return <Spin size="large" />;
+    return (
+      <div className="load">
+        <Spin size="large" />
+      </div>
+    );
   }
 
   return (
-    <div className={style.full}>
-      <div className={style.fullContent}>
+    <div className={styles.full}>
+      <div className={styles.fullContent}>
         <Image width={400} src={data.image} />
-        <div className={style.fullStats}>
+        <div className={styles.fullStats}>
           {data.stats.map((item) => (
             <Card key={item.title} title={item.title}>
               {item.value}
@@ -39,19 +43,19 @@ export const FullProductPage: FC = () => {
           ))}
         </div>
       </div>
-      <div className={style.fullWrap}>
-        <h2 className={style.fullTitle}>{data.name}</h2>
+      <div className={styles.fullWrap}>
+        <h2 className={styles.fullTitle}>{data.name}</h2>
 
-        <span className={style.fullPrice}>Price: {data.price}$</span>
+        <span className={styles.fullPrice}>Price: {data.price}$</span>
 
         <ButtonCart elem={data} />
 
-        <div className={style.fullAbili}>
-          <h3 className={style.fullAbiliTitle}>Abilities:</h3>
+        <div className={styles.fullAbili}>
+          <h3 className={styles.fullAbiliTitle}>Abilities:</h3>
           {data.abilities.map((elem) => (
             <div key={elem.title}>
-              <h4 className={style.fullAbiliName}>{elem.title}</h4>
-              <p className={style.fullAbiliDesc}>{elem.description}</p>
+              <h4 className={styles.fullAbiliName}>{elem.title}</h4>
+              <p className={styles.fullAbiliDesc}>{elem.description}</p>
             </div>
           ))}
         </div>
