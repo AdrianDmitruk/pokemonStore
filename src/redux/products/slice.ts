@@ -4,7 +4,12 @@ import { fetchProducts } from "./async-actions";
 import { Products, ProductsSliceState, Status } from "./types";
 
 const initialState: ProductsSliceState = {
-  data: [],
+  data: {
+    currentPage: 0,
+    totalPages: 0,
+    totalProducts: 0,
+    products: [],
+  },
   searchQuery: "",
   priceFrom: null,
   priceTo: null,
@@ -15,9 +20,6 @@ export const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    setDataProducts(state, action: PayloadAction<Products[]>) {
-      state.data = action.payload;
-    },
     setSearchQuery(state, action: PayloadAction<string>) {
       state.searchQuery = action.payload;
     },
@@ -32,16 +34,21 @@ export const productsSlice = createSlice({
     builder.addCase(fetchProducts.pending, (state) => {
       state.status = Status.LOADING;
     });
-    builder.addCase(fetchProducts.fulfilled, (state) => {
-      state.status = Status.SUCCESS;
-    });
+    builder.addCase(
+      fetchProducts.fulfilled,
+      (state, { payload }: PayloadAction<Products>) => {
+        state.data = payload;
+
+        state.status = Status.SUCCESS;
+      }
+    );
     builder.addCase(fetchProducts.rejected, (state) => {
       state.status = Status.ERROR;
     });
   },
 });
 
-export const { setDataProducts, setSearchQuery, setPriceFrom, setPriceTo } =
+export const { setSearchQuery, setPriceFrom, setPriceTo } =
   productsSlice.actions;
 
 export default productsSlice.reducer;

@@ -2,7 +2,7 @@ import { PayloadAction, createSlice, isAnyOf } from "@reduxjs/toolkit";
 
 import { getProductFeatch } from "./async-actions";
 import { ProductSliceState, Status } from "./types";
-import { Products } from "../products/types";
+import { ProductsItems } from "../products/types";
 
 const initialState: ProductSliceState = {
   data: {
@@ -24,7 +24,7 @@ export const productSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       getProductFeatch.fulfilled,
-      (state, { payload }: PayloadAction<Products>) => {
+      (state, { payload }: PayloadAction<ProductsItems>) => {
         state.data = payload;
         state.status = Status.SUCCESS;
       }

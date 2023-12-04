@@ -7,14 +7,14 @@ import { GET_PRODUCTS } from "../../api/endpoint";
 import { notification } from "antd";
 
 import { AxiosResponse } from "axios";
-import { Products } from "../products/types";
+import { ProductsItems } from "../products/types";
 
 export const getProductFeatch = createAsyncThunk(
   "product/getProductStatus",
   async (itemId: string, { rejectWithValue }) => {
     try {
-      const response: AxiosResponse<Products> =
-        await axiosInstance.get<Products>(`${GET_PRODUCTS}/${itemId}`);
+      const response: AxiosResponse<ProductsItems> =
+        await axiosInstance.get<ProductsItems>(`${GET_PRODUCTS}/${itemId}`);
 
       return response.data;
     } catch (error: any) {

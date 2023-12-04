@@ -1,4 +1,11 @@
 export interface Products {
+  currentPage: number;
+  totalPages: number;
+  totalProducts: number;
+  products: ProductsItems[];
+}
+
+export interface ProductsItems {
   _id: string;
   id: string;
   image: string;
@@ -21,7 +28,7 @@ export enum Status {
 }
 
 export type ProductsSliceState = {
-  data: Products[];
+  data: Products;
   searchQuery: string;
   priceFrom: number | null;
   priceTo: number | null;
@@ -31,4 +38,5 @@ export type ProductsSliceState = {
 export type IProductsParams = {
   page: number;
   limit: number;
+  name: string;
 };

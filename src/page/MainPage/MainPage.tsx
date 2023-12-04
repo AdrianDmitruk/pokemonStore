@@ -14,11 +14,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import cn from "classnames";
 
 export const MainPage: FC = () => {
-  const { data, status } = useSelector(selectProductsData);
+  const { data, status, searchQuery } = useSelector(selectProductsData);
 
-  const searchQuery = useSelector<RootState, string>(
-    (state) => state.products.searchQuery
-  );
   const priceFrom = useSelector<RootState, number | null>(
     (state) => state.products.priceFrom
   );
@@ -26,11 +23,12 @@ export const MainPage: FC = () => {
     (state) => state.products.priceTo
   );
 
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const [limitPage, setLimitPage] = useState<number>(10);
+
   const location = useLocation();
   const navigate = useNavigate();
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const limit = 20;
 
   const dispatch = useAppDispatch();
 
@@ -40,11 +38,21 @@ export const MainPage: FC = () => {
     const page = pageParam ? Number(pageParam) : 1;
 
     setCurrentPage(page);
-    dispatch(fetchProducts({ page, limit }));
-  }, [dispatch, currentPage]);
+  }, [location.search]);
 
-  const handlePageChange = (page: number) => {
+  useEffect(() => {
+    dispatch(
+      fetchProducts({
+        page: currentPage, // Используйте текущее значение currentPage
+        limit: limitPage,
+        name: searchQuery,
+      })
+    );
+  }, [dispatch, currentPage, searchQuery, priceFrom, priceTo, limitPage]);
+
+  const handlePageChange = (page: number, pageSize: number) => {
     setCurrentPage(page);
+    setLimitPage(pageSize);
     navigate(`${location.pathname}?page=${page}`);
   };
 
@@ -65,17 +73,19 @@ export const MainPage: FC = () => {
             {status === Status.LOADING ? (
               <Spin size="large" />
             ) : (
-              data.map((elem) => <Card key={elem._id} elem={elem} />)
+              data.products.map((elem) => <Card key={elem._id} elem={elem} />)
             )}
           </div>
         </section>
       </div>
       <div className={styles.pagination}>
-        {status === Status.SUCCESS && (
+        {status === Status.SUCCESS && data.totalProducts >= limitPage && (
           <Pagination
             defaultCurrent={currentPage}
-            total={480}
+            total={data.totalProducts}
             onChange={handlePageChange}
+            defaultPageSize={limitPage}
+            pageSizeOptions={[10, 20]}
           />
         )}
       </div>

@@ -1,12 +1,12 @@
 import { FC } from "react";
 
 import styles from "./Card.module.scss";
-import { Products } from "../../redux/products/types";
+import { ProductsItems } from "../../redux/products/types";
 import { Link } from "react-router-dom";
 import { ButtonCart } from "..";
 
 export interface CardProps {
-  elem: Products;
+  elem: ProductsItems;
 }
 
 export const Card: FC<CardProps> = (elem) => {
