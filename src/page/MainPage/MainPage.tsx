@@ -4,7 +4,7 @@ import { Card, Filters, Result, Search } from "../../components";
 
 import styles from "./MainPage.module.scss";
 import { Pagination, Spin } from "antd";
-import { RootState, useAppDispatch } from "../../redux/store";
+import { useAppDispatch } from "../../redux/store";
 import { fetchProducts } from "../../redux/products/async-actions";
 import { useSelector } from "react-redux";
 import { selectProductsData } from "../../redux/products/selectors";
@@ -14,14 +14,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import cn from "classnames";
 
 export const MainPage: FC = () => {
-  const { data, status, searchQuery } = useSelector(selectProductsData);
-
-  const priceFrom = useSelector<RootState, number | null>(
-    (state) => state.products.priceFrom
-  );
-  const priceTo = useSelector<RootState, number | null>(
-    (state) => state.products.priceTo
-  );
+  const { data, status, searchQuery, priceFrom, priceTo } =
+    useSelector(selectProductsData);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -46,6 +40,8 @@ export const MainPage: FC = () => {
         page: currentPage,
         limit: limitPage,
         name: searchQuery,
+        priceFrom: priceFrom || 0,
+        priceTo: priceTo || 0,
       })
     );
   }, [dispatch, currentPage, searchQuery, priceFrom, priceTo, limitPage]);

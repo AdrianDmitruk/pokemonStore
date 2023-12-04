@@ -12,10 +12,21 @@ export const fetchProducts = createAsyncThunk(
   "products/fetchProductsStatus",
   async (params: IProductsParams, { rejectWithValue }) => {
     try {
+      const url = `${GET_PRODUCTS}?page=${params.page}&limit=${params.limit}&name=${params.name}`;
+
+      if (
+        (params.priceFrom !== null && params.priceFrom !== 0) ||
+        params.name
+      ) {
+        `${url}&priceFrom=${params.priceFrom}`;
+      }
+
+      if ((params.priceTo !== null && params.priceTo !== 0) || params.name) {
+        `${url}&priceTo=${params.priceTo}`;
+      }
+
       const response: AxiosResponse<Products> =
-        await axiosInstance.get<Products>(
-          `${GET_PRODUCTS}?page=${params.page}&limit=${params.limit}&name=${params.name}`
-        );
+        await axiosInstance.get<Products>(url);
       return response.data;
     } catch (error: any) {
       const errorMessage = error.response?.data?.message || error.message;

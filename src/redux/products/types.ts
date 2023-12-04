@@ -39,4 +39,6 @@ export type IProductsParams = {
   page: number;
   limit: number;
   name: string;
+  priceFrom?: number;
+  priceTo?: number;
 };

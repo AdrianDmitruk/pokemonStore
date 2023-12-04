@@ -7,9 +7,10 @@ import { useSelector } from "react-redux";
 import { selectProductsData } from "../../redux/products/selectors";
 import { RootState, useAppDispatch } from "../../redux/store";
 import { setPriceFrom, setPriceTo } from "../../redux/products/slice";
+import { Status } from "../../redux/cart/types";
 
 export const Result: FC = () => {
-  const { data } = useSelector(selectProductsData);
+  const { data, status } = useSelector(selectProductsData);
 
   const dispatch = useAppDispatch();
 
@@ -27,11 +28,13 @@ export const Result: FC = () => {
 
   return (
     <div className={styles.result}>
-      <div className={styles.resultHeader}>
-        <h2 className={styles.resultHeaderNumber}>
-          {data.products.length} results
-        </h2>
-      </div>
+      {status === Status.SUCCESS && (
+        <div className={styles.resultHeader}>
+          <h2 className={styles.resultHeaderNumber}>
+            {data.totalProducts} results
+          </h2>
+        </div>
+      )}
       {(priceFrom || priceTo) && (
         <div className={styles.resultMain}>
           <div className={styles.resultMainPrice}>
