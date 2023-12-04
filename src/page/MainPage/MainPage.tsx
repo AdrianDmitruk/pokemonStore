@@ -43,7 +43,7 @@ export const MainPage: FC = () => {
   useEffect(() => {
     dispatch(
       fetchProducts({
-        page: currentPage, // Используйте текущее значение currentPage
+        page: currentPage,
         limit: limitPage,
         name: searchQuery,
       })

@@ -28,7 +28,9 @@ export const Result: FC = () => {
   return (
     <div className={styles.result}>
       <div className={styles.resultHeader}>
-        <h2 className={styles.resultHeaderNumber}>{data.length} results</h2>
+        <h2 className={styles.resultHeaderNumber}>
+          {data.products.length} results
+        </h2>
       </div>
       {(priceFrom || priceTo) && (
         <div className={styles.resultMain}>
