@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FC } from "react";
+import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { Input, Button, Select } from "antd";
 import styles from "./AuthPage.module.scss"; // Замените на путь к вашему файлу стилей
@@ -35,6 +36,11 @@ type FormType = "login" | "register";
 interface AuthPageProps {
   type: FormType;
 }
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string().required("Password is required"),
+});
 
 export const AuthPage: FC<AuthPageProps> = ({ type }) => {
   const initialValues: IRegisterData = {
@@ -76,7 +82,11 @@ export const AuthPage: FC<AuthPageProps> = ({ type }) => {
 
   return (
     <div className={styles.auth}>
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={validationSchema}
+      >
         <Form className={styles.authForm}>
           <h2 className={styles.authTitle}>{title}</h2>
 
@@ -192,6 +202,7 @@ export const AuthPage: FC<AuthPageProps> = ({ type }) => {
                 className={styles.authBtn}
                 type="primary"
                 htmlType="submit"
+                loading={status === Status.LOADING}
               >
                 Create Account
               </Button>
@@ -200,6 +211,7 @@ export const AuthPage: FC<AuthPageProps> = ({ type }) => {
                 className={styles.authBtn}
                 type="primary"
                 htmlType="submit"
+                loading={status === Status.LOADING}
               >
                 Log in
               </Button>
